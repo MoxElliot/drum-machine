@@ -1,7 +1,7 @@
 const Header = () => {
     return (
-        <div className="header">
-
+        <div className="header" style={{backgroundColor: "green"}}>
+            header
         </div>
     )
 }

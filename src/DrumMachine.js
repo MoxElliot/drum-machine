@@ -1,7 +1,7 @@
 import React from 'react';
 import Header from './elements/header.js';
 import DrumDisplay from './elements/drum-display.js';
-import VolumeSlider from './elements/volume-slider.js';
+import VolumeBar from './elements/volume-bar.js';
 
 class DrumMachine extends React.Component {
   constructor(props){
@@ -9,10 +9,10 @@ class DrumMachine extends React.Component {
   }
   render () {
     return (
-      <div id="drum-machine">
+      <div id="drum-machine" className='app-container'>
         <Header />
         <DrumDisplay />
-        <VolumeSlider />
+        <VolumeBar />
       </div>
     );
   }

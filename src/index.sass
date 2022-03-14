@@ -1,0 +1,33 @@
+$eggshell: #F0EAD6
+$appBorder: #654321
+$padWidth: 100px
+$padHeight: 80px
+
+body 
+    background-color: $eggshell
+
+#root 
+    display: flex
+    justify-content: center
+    align-items: center
+    height: 100vh
+
+.app-container
+    border: 5px solid #654321
+    position: relative
+    width: 660px
+    text-align: center
+    .pad-container
+        width: $padWidth * 3 + 32
+        height: $padHeight * 3 + 32
+        margin: 20px
+        .drum-pad
+            position: relative
+            float: left
+            width: $padWidth
+            height: $padHeight
+            margin-right: 10px
+            padding-top: 35px
+            box-sizing: border-box
+
+        
