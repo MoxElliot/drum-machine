@@ -1,7 +1,14 @@
+import { soundBank } from './components/sound-bank.js';
+
+
+
 function DrumMachine() {
+  <soundBank />
   return (
-    <div className="drum-machine">
-     
+    <div id="drum-machine">
+      <div id="button-box">
+
+      </div>
     </div>
   );
 }
