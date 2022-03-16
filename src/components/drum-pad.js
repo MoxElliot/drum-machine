@@ -1,8 +1,12 @@
-import React, { Component } from "react";
+import React from "react";
 
 
-const DrumPad = () =>  {
-  const bankOne= [
+class DrumPad extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+     name: "React",
+     bankOne: [
     {
       keyCode: 81,
       keyTrigger: 'Q',
@@ -57,15 +61,25 @@ const DrumPad = () =>  {
       id: 'Closed-HH',
       url: 'https://s3.amazonaws.com/freecodecamp/drums/Cev_H2.mp3'
     }
-  ]
+    ],
+    isPlaying: false
+    };
+  }
+
+    
+      render () {
+        
+
+          return (
+            this.state.bankOne.map(function(bank){
+          
+              return <button onClick={bank.url}> {bank.keyTrigger} </button>;
+            })
+      )}
+    
   
-      return (
-        bankOne.map((bank) => (<a className="drum-pad" href="bank.url" style={{backgroundColor: "blue"}}>
-          {bank.keyTrigger}
-        </a>)
-      )
-    );
-  };
+  
+ };
 
 
   export default DrumPad;

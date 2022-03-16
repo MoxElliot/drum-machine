@@ -3,7 +3,7 @@ import Header from './elements/header.js';
 import DrumDisplay from './elements/drum-display.js';
 import VolumeBar from './elements/volume-bar.js';
 
-class DrumMachine extends React.Component {
+class App extends React.Component {
   constructor(props){
     super(props)
   }
@@ -18,4 +18,4 @@ class DrumMachine extends React.Component {
   }
 }
 
-export default DrumMachine;
+export default App;
