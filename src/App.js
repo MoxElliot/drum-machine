@@ -57,46 +57,37 @@ const bankOne = [
 ]
 
 class App extends React.Component {
- 
-  render () {
+  render(){ 
     return (
-      <div id="drum-machine" className='app-container'>
+    <div id="drum-machine" className='app-container'>
         <div className="header" style={{backgroundColor: "green"}}>
             header
         </div>
-        <DrumDisplay />
-      </div>
-    );
-  }
-}
-
-const DrumDisplay = () => {
- 
-  return (
-    <div className='control-container'>
+      <div className='control-container'>
+      
         <div id="display" className='pad-container'>
           {bankOne.map ((sound) => (
-          <DrumPad  sound={sound} className="drum-pad"/>
-          )
-          )}
+          <DrumPad sound={sound} key={sound.keyCode} className="drum-pad"/>
+          ))}
         </div>
       
-      <div className="display-bar">
-        <p className="display" >
-          Place Holder for Sound Display
-        </p>
+      <div className="display-bar" id="display-bar">
+       <p>"test"</p>
       </div>
-    </div>)
-}
+      </div>
+    </div>
+    )
+  }
+};
 
 const DrumPad = ({ sound }) => {
-  console.log(sound);
+  const [soundDisplay, setsoundDisplay] = React.useState("")
   const handleKeyDown = (e) => {
     if (e.keyCode === sound.keyCode) {
       playSound();
     };
   };
-
+  
   React.useEffect(() => {
     window.addEventListener('keydown', handleKeyDown);
       return () => {
@@ -106,9 +97,9 @@ const DrumPad = ({ sound }) => {
 
   const playSound = () => {
     const playAudio = document.getElementById(sound.keyTrigger);
-    
     playAudio.currentTime = 0;
     playAudio.play();
+    setsoundDisplay(() => sound.id)
   }
 
   return (
