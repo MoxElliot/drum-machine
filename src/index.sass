@@ -4,6 +4,12 @@ $appFill:#544838
 $padWidth: 100px
 $padHeight: 80px
 
+@mixin rounded
+    border-radius: 50px
+    &:hover     
+        background-color: #f0e3b8
+        font-weight: bold
+
 body 
     background-color: $eggshell
 
@@ -19,6 +25,9 @@ body
     position: relative
     width: 660px
     text-align: center
+    .control-container
+        display: flex
+        flex-direction: row
     .pad-container
         display: grid
         grid-template-rows: 1fr 1fr 1fr
@@ -28,9 +37,25 @@ body
         margin: 20px
         .drum-pad
             display: flex
+            background-color: $eggshell
             align-items: center
             justify-content: center
+            @include rounded
+            margin: 5px
+    .display-bar
+        align-self: center
+        display: grid
+        background-color: $eggshell
+        width: $padWidth * 3
+        height: $padHeight
+        margin: 20px
+        padding: 5px
+        @include rounded
+        .display-box
             border: 1px solid black
+            @include rounded
+            
+
         
 
         
