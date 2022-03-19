@@ -1,23 +1,32 @@
 $eggshell: #F0EAD6
 $appBorder: #654321
-$appFill:#544838
+$appFill:#a36c23
 $padWidth: 100px
 $padHeight: 80px
 
 @mixin rounded
     border-radius: 50px
+
+@mixin hover
     &:hover     
         background-color: #f0e3b8
         font-weight: bold
 
+@mixin fontStyle
+    font-weight: 900
+    font-size: 32px
+    
+
 body 
     background-color: $eggshell
+    
 
 #root 
     display: flex
     justify-content: center
     align-items: center
     height: 100vh
+    
 
 .app-container
     border: 5px solid $appBorder
@@ -25,6 +34,22 @@ body
     position: relative
     width: 660px
     text-align: center
+    @include rounded
+    .header
+        background-color: green
+        border: 3px solid $appBorder
+        height: 50px
+        width:635px
+        margin: auto
+        margin-top: 10px
+        display: flex
+        justify-content: center
+        align-items: center
+        @include rounded
+        .header-p
+            @include fontStyle
+            
+            
     .control-container
         display: flex
         flex-direction: row
@@ -40,20 +65,26 @@ body
             background-color: $eggshell
             align-items: center
             justify-content: center
+            border: 3px solid $appBorder
             @include rounded
+            @include hover
+            
             margin: 5px
     .display-bar
         align-self: center
         display: grid
         background-color: $eggshell
+        border: 3px solid $appBorder
         width: $padWidth * 3
         height: $padHeight
         margin: 20px
         padding: 5px
         @include rounded
-        .display-box
-            border: 1px solid black
+        .display-p
             @include rounded
+            @include fontStyle
+            margin: 20px
+            
             
 
         

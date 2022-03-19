@@ -1,5 +1,7 @@
 import React from 'react';
-const bankOne = [
+
+
+let soundBank = [
   {
     keyCode: 81,
     keyTrigger: 'Q',
@@ -54,59 +56,88 @@ const bankOne = [
     id: 'Closed-HH',
     url: 'https://s3.amazonaws.com/freecodecamp/drums/Cev_H2.mp3'
   }
-]
+];
+
 
 class App extends React.Component {
-  render(){ 
-    return (
-    <div id="drum-machine" className='app-container'>
-        <div className="header" style={{backgroundColor: "green"}}>
-            header
+    constructor(props) {
+        super(props)
+            this.state = {
+                soundDisplay: "Sound Display"
+            };
+        }
+
+    updateSound = soundDisplay => this.setState({ soundDisplay });
+
+    render() {
+        return (
+        <div id="drum-machine" className='app-container'>
+            <div className="header">
+                <p className="header-p">Drum Machine</p>
+            </div>
+            
+            <div className="control-container">  
+                <div id="drum-pad" className='pad-container'>
+                    {soundBank.map ((sound) => (
+                    <DrumPad 
+                      sound={sound} 
+                      updateSound={ this.updateSound  } 
+                      src={sound.url}
+                      key={sound.id}
+                      id={sound.id} />
+                    ))}
+                </div>
+              
+                <div className="display-bar" id="display" >
+                    <p className="display-p">{this.state.soundDisplay}</p>
+                </div></div>
+            
         </div>
-      <div className='control-container'>
-      
-        <div id="display" className='pad-container'>
-          {bankOne.map ((sound) => (
-          <DrumPad sound={sound} key={sound.keyCode} className="drum-pad"/>
-          ))}
-        </div>
-      
-      <div className="display-bar" id="display-bar">
-       <p>"test"</p>
-      </div>
-      </div>
-    </div>
-    )
-  }
-};
-
-const DrumPad = ({ sound }) => {
-  const [soundDisplay, setsoundDisplay] = React.useState("")
-  const handleKeyDown = (e) => {
-    if (e.keyCode === sound.keyCode) {
-      playSound();
-    };
-  };
-  
-  React.useEffect(() => {
-    window.addEventListener('keydown', handleKeyDown);
-      return () => {
-        window.removeEventListener('keydown',handleKeyDown)
-      }
-    })
-
-  const playSound = () => {
-    const playAudio = document.getElementById(sound.keyTrigger);
-    playAudio.currentTime = 0;
-    playAudio.play();
-    setsoundDisplay(() => sound.id)
-  }
-
-  return (
-    <div onClick={playSound} id={sound.keyCode} class="drum-pad">
-      <audio id={sound.keyTrigger} className="clip" src={sound.url}/>
-      {sound.keyTrigger}   
-    </div>)
+        )
+    }
 }
+
+
+class DrumPad extends React.Component {
+    
+  componentDidMount() {
+    document.addEventListener("keydown", this.handleKeydown);
+    window.focus();
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener("keydown", this.handleKeydown);
+  }
+
+  handleKeydown = e => {
+    if (e.keyCode === this.props.sound.keyCode) {
+      this.audio.play();
+      this.audio.currentTime = 0;
+      this.props.updateSound(this.props.id);
+    }
+  };
+
+  handleClick = () => {
+    this.audio.play();
+    this.audio.currentTime = 0;
+    this.props.updateSound(this.props.id);
+  };
+
+  render (){ 
+  return (
+    
+    <div onClick={this.handleClick} id={this.props.sound.keyCode} className="drum-pad">
+      {this.props.sound.keyTrigger}
+      <audio 
+          id={this.props.sound.keyTrigger} 
+          className="clip" 
+          src={this.props.sound.url}
+          ref={ref => (this.audio = ref)}>
+          </audio>
+      
+    </div>
+    )}
+}
+
 
 export default App;
